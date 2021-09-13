@@ -1,0 +1,58 @@
+/*
+Theme Name: Themebase
+Theme URI: http://hn.arrowpress.net/themebase/
+Author: Top Theme
+Author URI: http://arrowhitech.com/
+Description: Themebase - Multipurpose eCommerce WordPress Template
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 7.0
+License: 
+License URI: 
+Tags: one-column, two-columns, right-sidebar, rtl-language-support, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, sticky-post, theme-options, translation-ready
+Text Domain: themebase
+*/
+.form-contact .form-row.no-pull {
+    width: 33%;
+    display: inline-block;
+}
+.form-contact .form-row {
+    padding: 0 10px;
+    margin-bottom: 30px;
+}
+.form-contact .form-row .wpcf7-form-control-wrap {
+    display: inline-block;
+    width: 100%;
+}
+.form-contact {
+    display: inline-table;
+}
+.form-contact .wpcf7-submit {
+    margin-left: 10px;
+}
+.form-row input {
+    height: 40px;
+}
+.form-contact .form-row input, .form-contact .form-row .placeholder, .form-contact .form-row input[type=number], .form-contact .form-row input[type=text], .form-contact .form-row textarea {
+    padding: 10px 20px;
+    font-style: italic;
+    margin: 0;
+}
+
+.form-row input, .form-row .placeholder, .form-row textarea {
+    background: #f8f7f7 none repeat scroll 0 0;
+    border: medium none;
+    font-size: 14px;
+    line-height: normal;
+    padding: 10px 20px;
+    width: 100%;
+    font-style: italic;
+}
+.form-row input[type=email], .form-row input[type=password], .form-row input[type=search], .form-row input[type=text], .form-row input[type=url], .form-row select, .form-row textarea {
+    height: 45px;
+    border: 0;
+    padding: 10px 20px;
+    background: #f8f7f7;
+    color: #f8f7f7;
+    font-size: 16px;
+}
