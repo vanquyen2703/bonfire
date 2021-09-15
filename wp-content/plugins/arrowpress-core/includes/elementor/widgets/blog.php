@@ -45,6 +45,7 @@ class Apr_Core_Blog extends Widget_Base {
                     'style6'   =>  __( 'Layout 6', 'apr-core' ),
                     'style7'   =>  __( 'Layout 7', 'apr-core' ),
                     'style8'   =>  __( 'Layout 8', 'apr-core' ),
+                    'style9'   =>  __( 'Layout 9', 'apr-core' ),
                 ],
             ]
         );
@@ -774,8 +775,8 @@ class Apr_Core_Blog extends Widget_Base {
 		$settings           =   $this->get_settings_for_display();
         $cat_post           =   $settings['blog_select_cat'];
         $column_desktop     =   $settings['blog_number_column'];
-        $column_tablet      =   $settings['blog_number_column_tablet'];
-        $column_mobile      =   $settings['blog_number_column_mobile'];
+        // $column_tablet      =   $settings['blog_number_column_tablet'];
+        // $column_mobile      =   $settings['blog_number_column_mobile'];
         $blog_style         =   $settings['blog_style'];
         $limit_post         =   $settings['blog_limit'];
         $order_by_post      =   $settings['blog_order_by'];
@@ -862,8 +863,8 @@ class Apr_Core_Blog extends Widget_Base {
             );
         endif;
         $col_desktop = 12/$column_desktop;
-        $col_tablets = 12/$column_tablet;
-        $col_mobile  = 12/$column_mobile;
+        // $col_tablets = 12/$column_tablet;
+        //  $col_mobile  = 12/$column_mobile;
 		global $wp_query, $post;
         query_posts($apr_post_type_arg);
         
@@ -884,6 +885,7 @@ class Apr_Core_Blog extends Widget_Base {
             <?php if($blog_style ==='style7'){echo 'grid-style7 row';}?>
             <?php if($blog_style ==='style8'){echo 'grid-style8 blog-slide ';}?>
             <?php if($blog_style ==='style6'){echo 'grid-style1 grid-style6';}?>
+            <?php if($blog_style ==='style9'){echo 'grid-style9 blog-slide';}?>
             <?php if($blog_style ==='style3'){echo 'grid-style3 has-date blog-slide';}?> <?php echo esc_attr($class_effect);?> 
             <?php if($blog_layout ==='grid'){echo ' blog-layout-grid ';}?>">
             <?php $i=0; while ( have_posts() ): the_post(); ?>
@@ -1126,6 +1128,11 @@ class Apr_Core_Blog extends Widget_Base {
                                         </a> 
                                     </div>
                                  <?php endif;?>
+                                 <?php if($blog_style ==='style9'):?>
+                                    <div class="post-meta-info">
+                                         <div class="custom-date-style"><?php echo get_the_date(); ?></div>
+                                    </div>
+                                 <?php endif;?>
                                 <?php if($blog_style ==='style8'):?>
                                     <a class="post_author" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>">
                                        <?php if($avatar = get_avatar(get_the_author_meta('ID')) !== FALSE): ?>
@@ -1205,7 +1212,7 @@ class Apr_Core_Blog extends Widget_Base {
                     });
                 });
             </script>
-        <?php }elseif ($blog_style ==='style2' || $blog_style ==='style3' || $blog_style ==='style8'){ ?>
+        <?php }elseif ($blog_style ==='style2' || $blog_style ==='style3' || $blog_style ==='style8' || $blog_style ==='style9'){ ?>
             <script>
                 jQuery(document).ready(function($) {
                     $('#<?php echo esc_js($id);?>.blog-slide').slick({
@@ -1305,6 +1312,8 @@ class Apr_Core_Blog extends Widget_Base {
             </script>
 
         <?php } ?>
+       
+
         <?php endif;}
 }
 Plugin::instance()->widgets_manager->register_widget_type( new Apr_Core_Blog() );

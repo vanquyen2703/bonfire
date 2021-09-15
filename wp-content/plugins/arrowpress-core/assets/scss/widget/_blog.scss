@@ -372,6 +372,12 @@
       }
     }
   }
+  .custom-date-style{
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 24px;
+  }
 }
 .sc-blog-furniture {
   @media (max-width: 767px) {
