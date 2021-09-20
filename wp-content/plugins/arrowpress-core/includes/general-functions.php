@@ -21,7 +21,7 @@ class Apr_Core_Widgets {
 
     }
     
-    private $shortcodes = array("blog","product","sale-popup", "icon-box","social", "advanced-tabs", "heading-modern", "banner",  "testimolials", "woo-categories", "mailchimp", "countdown","contact-form","elementor-template", "header-group", "site-logo","slide-carousel","nav-menu", "counter", "search-form", "team", "single-product","search-mobile","lookbook","brands");
+    private $shortcodes = array("blog","product","sale-popup", "icon-box","social", "advanced-tabs", "heading-modern", "banner",  "testimolials", "woo-categories", "mailchimp", "countdown","contact-form","elementor-template", "header-group", "site-logo","slide-carousel", "nav-menu", "counter", "search-form", "team", "single-product","search-mobile","lookbook","brands");
 
 	private $widgets = array('category-product','active-theme','compare','contact', 'logo', 'posts', 'social', 'elementor-template');
 	

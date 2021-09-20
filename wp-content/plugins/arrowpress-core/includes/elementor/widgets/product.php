@@ -3680,23 +3680,31 @@ if (class_exists('WooCommerce')) {
         protected function render()
         {
             $this->apr_sc_product();
-            global $woocommerce_loop;
-			$show_custom_image = $custom_dimension_width = $custom_dimension_height = '';
+			global $woocommerce_loop;
+			$show_custom_image = $custom_dimension_width = $custom_dimension_height = $product_class = $change_content_position_lable = $show_wishlist_not_full = $class_position_price = $category_prd_class = $hide_title = $hide_title_tablet = $wishlist_position_class = $wishlist_position_class2 = $action_icon_position_class = $none_wishlist_class = $show_attr_class = $content_align_class = $content_align_tablet_class = $content_align_mobile_class = $show_add_cart_bottom = $hide_add_cart_bottom_table = $hide_add_cart_bottom_mobile = $class_show_percentage_lable = $show_border_product_class = $pagination_type = $pagination_number = $hide_desc_product = $filter_product_by_class = '';
             $settings = $this->get_settings_for_display();
-
             $product_type = $settings['product_type'];
             $product_layout = $settings['product_layout'];
             $show_btn_loadmore_product = $settings['show_btn_loadmore_product'];
             $text_button = $settings['text_button'];
             $show_border_product = $settings['show_border_product'];
-            $layout_product_type_3 = $settings['layout_product_type_3'];
             $filter_by = $settings['filter_by'];
             $columns = $settings['product_column_number'];
-            $columns_tablet = $settings['product_column_number_tablet'];
-            $columns_mobile = $settings['product_column_number_mobile'];
+            $columns_tablet = isset($settings['product_column_number_tablet']);
+            $columns_mobile = isset($settings['product_column_number_mobile']);
+			if($columns_tablet){
+				$columns_tablet = $settings['product_column_number_tablet'];
+			}else{
+				$columns_tablet = 3;
+			}
+			if($columns_mobile){
+				$columns_mobile = $settings['product_column_number_mobile'];
+			}else{
+				$columns_mobile = 2;
+			}
             $content_align = $settings['content_align'];
-            $content_align_tablet = $settings['content_align_tablet'];
-            $content_align_mobile = $settings['content_align_mobile'];
+            $content_align_tablet = isset($settings['content_align_tablet']);
+            $content_align_mobile = isset($settings['content_align_mobile']);
             $cat_slug = $settings['product_cat'];
             $limit_post = $settings['product_limit'];
             $limit_post_mobile = $settings['product_limit_mobile'];
@@ -3715,10 +3723,10 @@ if (class_exists('WooCommerce')) {
             $wishlist_position2 = $settings['wishlist_position2'];
             $show_add_to_cart_bottom = $settings['show_add_to_cart_bottom'];
             $show_percentage_lable = $settings['show_percentage_lable'];
-            $hide_add_to_cart_bottom_table = $settings['hide_add_to_cart_bottom_table'];
-            $hide_add_to_cart_bottom_mobile = $settings['hide_add_to_cart_bottom_mobile'];
-            $hide_title_product_mobile = $settings['hide_title_product_mobile'];
-            $hide_title_product_tablet = $settings['hide_title_product_tablet'];
+            $hide_add_to_cart_bottom_table = isset($settings['hide_add_to_cart_bottom_table']);
+            $hide_add_to_cart_bottom_mobile = isset($settings['hide_add_to_cart_bottom_mobile']);
+            $hide_title_product_mobile = isset($settings['hide_title_product_mobile']);
+            $hide_title_product_tablet = isset($settings['hide_title_product_tablet']);
             $show_category_product = $settings['show_category_product'];
             $show_compare = $settings['show_compare'];
             $show_wishlist = $settings['show_wishlist'];
@@ -3750,7 +3758,6 @@ if (class_exists('WooCommerce')) {
 			
 			//print_r($product_ids);
             $filter_product_by = $settings['filter_product_by'];
-            $product_class = $change_content_position_lable = $show_wishlist_not_full = $class_position_price = $category_prd_class = $hide_title = $hide_title_tablet = $wishlist_position_class = $wishlist_position_class2 = $action_icon_position_class = $none_wishlist_class = $show_attr_class = $content_align_class = $content_align_tablet_class = $content_align_mobile_class = $show_add_cart_bottom = $hide_add_cart_bottom_table = $hide_add_cart_bottom_mobile = $class_show_percentage_lable = $layout_product_type_3_class = $show_border_product_class = $pagination_type = $pagination_number = $hide_desc_product = $filter_product_by_class = '';
             if ($product_type == 'default' && (($columns == '2' || $columns == '3') || ($settings['slidestoshow'] == '2' || $settings['slidestoshow'] == '3'))) {
                 $class_position_price = 'price-position';
             }
@@ -3778,21 +3785,27 @@ if (class_exists('WooCommerce')) {
                 $content_align_class = 'content-right';
             } elseif ($content_align == 'center') {
                 $content_align_class = 'content-center';
-            }
+            }else{
+				$content_align_class = 'content-left';
+			}
             if ($content_align_tablet == 'left') {
                 $content_align_tablet_class = 'content-tl-left';
             } elseif ($content_align_tablet == 'center') {
                 $content_align_tablet_class = 'content-tl-center';
             } elseif ($content_align_tablet == 'right') {
                 $content_align_tablet_class = 'content-tl-right';
-            }
+            }else{
+				$content_align_tablet_class = 'content-tl-left';
+			}
             if ($content_align_mobile == 'left') {
                 $content_align_mobile_class = 'content-mb-left';
             } elseif ($content_align_mobile == 'center') {
                 $content_align_mobile_class = 'content-mb-center';
             } elseif ($content_align_mobile == 'right') {
                 $content_align_mobile_class = 'content-mb-right';
-            }
+            }else{
+				$content_align_mobile_class = 'content-mb-left';
+			}
             if ($hide_wishlist_before_hover === 'yes') {
                 $none_wishlist_class = 'none-wishlist-before-hover';
             }
@@ -3806,9 +3819,6 @@ if (class_exists('WooCommerce')) {
             if ($show_border_product !== 'yes') {
                 $show_border_product_class = 'no-border-content';
             }
-            if ($layout_product_type_3 === 'yes') {
-                $layout_product_type_3_class = 'layout2_product_type_3';
-            }
             if ($show_separator_out === 'yes') {
                 $show_separator_out = 'show-separator-out';
             }
@@ -3818,7 +3828,9 @@ if (class_exists('WooCommerce')) {
                 $action_icon_position_class = 'product-action-horizontal-middle';
             } elseif ($action_icon_position === 'horizontal_middle_wishlist') {
                 $action_icon_position_class = 'product-action-horizontal-middle middle-has-wishlist';
-            }
+            }else{
+				$action_icon_position_class = 'product-action-horizontal-bottom';
+			}
             if ($wishlist_position === 'top') {
                 $wishlist_position_class = 'wishlist-position-top';
             }
@@ -3826,7 +3838,9 @@ if (class_exists('WooCommerce')) {
                 $wishlist_position_class2 = 'wishlist--top';
             } elseif ($wishlist_position2 === 'bottom') {
                 $wishlist_position_class2 = 'wishlist--bottom';
-            }
+            }else{
+				$wishlist_position_class2 = 'wishlist--top';
+			}
             if ($show_category_product !== 'yes') {
                 $category_prd_class = 'hide-category-product';
             }
@@ -3869,8 +3883,8 @@ if (class_exists('WooCommerce')) {
             
            
 
-            $id = 'apr_product_' . wp_rand();
-            $id_tab = 'apr_tab_item_' . wp_rand();
+            $id = 'toptheme_product_' . wp_rand();
+            $id_tab = 'toptheme_tab_item_' . wp_rand();
             $is_rtl = is_rtl();
             $direction = $is_rtl ? 'true' : 'false';
             $show_dots = (in_array($settings['navigation'], ['dots', 'both']));
@@ -3918,6 +3932,43 @@ if (class_exists('WooCommerce')) {
             } else {
                 $paginate = 'false';
             }
+			$slidesrow = $settings['slidesrow'];
+			$slidesrow_tablet = isset($settings['slidesrow_tablet']);
+			$slidesrow_mobile = isset($settings['slidesrow_mobile']);
+			if($slidesrow !== ''){
+				$slidesrow = $settings['slidesrow'];
+			}else{
+				$slidesrow = 1;
+			}
+			if($slidesrow_tablet){
+				$slidesrow_tablet = $settings['slidesrow_tablet'];
+			}else{
+				$slidesrow_tablet = 1;
+			}
+			if($slidesrow_mobile){
+				$slidesrow_mobile = $settings['slidesrow_mobile'];
+			}else{
+				$slidesrow_mobile = 1;
+			}
+			
+			$centerpadding = isset($settings['centerpadding']);
+			$centerpadding_tablet = isset($settings['centerpadding_tablet']);
+			$centerpadding_mobile = isset($settings['centerpadding_mobile']);
+			if($centerpadding){
+				$centerpadding = $settings['centerpadding'];
+			}else{
+				$centerpadding = 0;
+			}
+			if($centerpadding_tablet){
+				$centerpadding_tablet = $settings['centerpadding_tablet'];
+			}else{
+				$centerpadding_tablet = 0;
+			}
+			if($centerpadding_mobile){
+				$centerpadding_mobile = $settings['centerpadding_mobile'];
+			}else{
+				$centerpadding_mobile = 0;
+			}
             ?>
             <?php if ($settings['product_layout'] == 'tab') : ?>
             <div id="<?php echo esc_attr($id_tab); ?>"
@@ -4444,7 +4495,7 @@ if (class_exists('WooCommerce')) {
             <?php if ($show_btn_loadmore_product === 'yes' && $text_button != '') : ?>
             <script>
                 jQuery(document).ready(function ($) {
-                    function lusionLoadMoreSc() {
+                    function themebaseLoadMoreSc() {
                         var $j = jQuery.noConflict();
                         var $container = $j('#<?php echo esc_attr($id); ?> ul.products');
                         $j('#<?php echo esc_attr($id); ?> .view-more-button').off('click tap').on('click tap', function (e) {
@@ -4471,7 +4522,7 @@ if (class_exists('WooCommerce')) {
                     }
 
                     $(window).load(function () {
-                        lusionLoadMoreSc();
+                        themebaseLoadMoreSc();
                     });
                 });
             </script>

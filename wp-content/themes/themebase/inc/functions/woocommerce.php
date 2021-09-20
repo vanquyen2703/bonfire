@@ -45,7 +45,7 @@ add_action('woocommerce_after_single_product_other_summary', 'woocommerce_output
 add_action('woocommerce_widget_shopping_cart_buttons', 'themebase_woocommerce_widget_shopping_cart_proceed_to_checkout',15);
 add_action('woocommerce_info_product', 'themebase_info_product', 10);
 add_action('woocommerce_price_custom', 'woocommerce_template_loop_price', 10);
-add_action('woocommerce_before_single_product_summary', 'themebase_show_sale_percentage_loop', 10);
+// add_action('woocommerce_before_single_product_summary', 'themebase_show_sale_percentage_loop', 10);
 
 /* 3: Add Filter */
 add_filter('themebase_woocommerce_show_subcategories', 'woocommerce_maybe_show_product_subcategories');

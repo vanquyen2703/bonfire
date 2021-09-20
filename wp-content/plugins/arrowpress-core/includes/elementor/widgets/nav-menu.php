@@ -1308,7 +1308,7 @@ class Apr_Core_Nav_Menu extends Widget_Base
                     </p>
                 <?php endif;?>
                 <?php 
-                \Lusion::menu_vertical($settings['menu']); ?>
+                \Themebase::menu_vertical($settings['menu']); ?>
             </nav>
         <?php elseif ('dropdown' === $settings['layout']) : ?> 
             <div class="menu-icon">
@@ -1316,7 +1316,7 @@ class Apr_Core_Nav_Menu extends Widget_Base
             </div>
             <nav <?php echo $this->get_render_attribute_string('main-menu'); ?>>
                 <?php
-                \Lusion::menu_builder($settings['menu']); ?>
+                \Themebase::menu_builder($settings['menu']); ?>
             </nav>
         <?php else:?>
             <nav <?php echo $this->get_render_attribute_string('main-menu'); ?>>
@@ -1327,7 +1327,7 @@ class Apr_Core_Nav_Menu extends Widget_Base
                 <span class="caret-submenu"><i class="theme-icon-download"></i></span>
                 <?php } ?>
                 <?php
-                \Lusion::menu_builder($settings['menu']);
+                \Themebase::menu_builder($settings['menu']);
                 ?>
             </nav>
         <?php endif;
